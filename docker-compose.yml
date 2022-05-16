@@ -7,7 +7,7 @@ version: '3.8'
 services:
   owncloud:
     image: owncloud/server:${APP_VERSION}
-    container_name: ${APP_CONTAINER_NAME}
+    container_name: ${APP_NAME}
     ports:
       - ${APP_PORT}:8080
     volumes:
@@ -38,7 +38,7 @@ services:
 
   mysql:
     image: mysql:${DB_MYSQL_VERSION}
-    container_name: owncloud-mysql
+    container_name: ${APP_NAME}-db
     restart: always
     stdin_open: true
     tty: true
@@ -61,7 +61,7 @@ services:
 
   redis:
     image: redis:6
-    container_name: owncloud-redis
+    container_name: ${APP_NAME}-redis
     restart: always
     command: ["--databases", "1"]
     healthcheck:
@@ -72,14 +72,11 @@ services:
     volumes:
       - redis:/data
 
-networks:
-  default:
-      name: ${APP_NETWORK}
-
 volumes:
   owncloud:
-    driver: local
   redis:
-    driver: local
   mysql:
-    driver: local
+ 
+networks:
+  default:
+      name: ${APP_NAME}
