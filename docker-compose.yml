@@ -46,8 +46,7 @@ services:
      - ${DB_MYSQL_PORT}:3306
     command: ["--max-allowed-packet=128M", "--innodb-log-file-size=64M", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
     volumes:
-      - ${VOLUMES_PATH_PREFIX}/mysql/mysql_config/conf.d:/etc/mysql/conf.d
-      - ${VOLUMES_PATH_PREFIX}/mysql/mysql_data:/var/lib/mysql
+      - mysql:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=owncloud"]
       interval: 10s
