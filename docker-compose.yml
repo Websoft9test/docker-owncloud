@@ -9,7 +9,7 @@ services:
     image: owncloud/server:${APP_VERSION}
     container_name: ${APP_NAME}
     ports:
-      - ${APP_PORT}:8080
+      - ${APP_HTTP_PORT}:8080
     volumes:
       - owncloud:/mnt/data
     environment:
